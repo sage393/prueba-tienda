@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="mensajes" showDetail="true" />
+
+            <p:commandButton value="Inicio" action="index.xhtml?faces-redirect=true" ajax="false" 
+                             style="margin: 0 auto; display: block; margin-bottom: 25px;"/>
+            <p:commandButton value="Nuevo producto" actionListener="#{productoManagedBean.nuevoProducto()}" 
+                             update="form:pgProducto"
+                             oncomplete="PF('dlProducto').show()"
+                             style="margin: 0 auto; display: block; margin-bottom: 25px;"/>
+
+            <p:dataTable id="dtProducto" value="#{productoManagedBean.productosList}" var="item">
+                <p:column headerText="Id" sortBy="#{item.id}">
+                    <h:outputText value="#{item.id}" />
+                </p:column>
+                <p:column headerText="Nombre" sortBy="#{item.nombre}">
+                    <h:outputText value="#{item.nombre}" />
+                </p:column>
+                <p:column headerText="Descripciṕn" sortBy="#{item.descripcion}">
+                    <h:outputText value="#{item.descripcion}" />
+                </p:column>
+                <p:column headerText="Precio" sortBy="#{item.precio}">
+                    <h:outputText value="#{item.precio}" />
+                </p:column>
+                <p:column headerText="">
+                    <p:commandButton value="Editar" actionListener="#{productoManagedBean.editarProducto(item)}" 
+                                     update="form:pgProducto" oncomplete="PF('dlProducto').show()"/>
+                    <p:commandButton value="Eliminar" actionListener="#{productoManagedBean.eliminarProducto(item)}" 
+                                     update="form:dtProducto form:mensajes"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog header="Producto" widgetVar="dlProducto" minHeight="500" showEffect="fade">
+                <p:panelGrid id="pgProducto" columns="2">
+                    <h:outputText value="Nombres" />
+                    <p:inputText value="#{productoManagedBean.productoEnEdicion.nombre}" />
+
+                    <h:outputText value="Descripción" />
+                    <p:inputText value="#{productoManagedBean.productoEnEdicion.descripcion}" />
+
+                    <h:outputText value="Precio" />
+                    <p:inputText value="#{productoManagedBean.productoEnEdicion.precio}" />
+
+                    <p:commandButton value="Guardar" actionListener="#{productoManagedBean.guardarProducto}" 
+                                     update="form:dtProducto form:mensajes" oncomplete="PF('dlProducto').hide()" />
+                    <p:commandButton value="Cancelar" actionListener="#{productoManagedBean.nuevoProducto()}" 
+                                     update="form:dtProducto" oncomplete="PF('dlProducto').hide()" />
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

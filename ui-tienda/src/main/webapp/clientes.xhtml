@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Clientes</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="mensajes" showDetail="true" />
+            
+            <p:commandButton value="Inicio" action="index.xhtml?faces-redirect=true" ajax="false" 
+                             style="margin: 0 auto; display: block; margin-bottom: 25px;"/>
+            <p:commandButton value="Nuevo cliente" actionListener="#{clienteManagedBean.nuevoCliente()}" 
+                             update="form:pgCliente"
+                             oncomplete="PF('dlCliente').show()"
+                             style="margin: 0 auto; display: block; margin-bottom: 25px;"/>
+            
+            <p:dataTable id="dtCliente" value="#{clienteManagedBean.clientesList}" var="item">
+                <p:column headerText="Id" sortBy="#{item.id}">
+                    <h:outputText value="#{item.id}" />
+                </p:column>
+                <p:column headerText="Nombres" sortBy="#{item.nombres}">
+                    <h:outputText value="#{item.nombres}" />
+                </p:column>
+                <p:column headerText="Apellidos" sortBy="#{item.apellidos}">
+                    <h:outputText value="#{item.apellidos}" />
+                </p:column>
+                <p:column headerText="DUI" sortBy="#{item.dui}">
+                    <h:outputText value="#{item.dui}" />
+                </p:column>
+                <p:column headerText="">
+                    <p:commandButton value="Editar" actionListener="#{clienteManagedBean.editarCliente(item)}" 
+                                     update="form:pgCliente" oncomplete="PF('dlCliente').show()"/>
+                    <p:commandButton value="Eliminar" actionListener="#{clienteManagedBean.eliminarCliente(item)}" 
+                                     update="form:dtCliente form:mensajes"/>
+                </p:column>
+            </p:dataTable>
+            
+            <p:dialog header="Cliente" widgetVar="dlCliente" minHeight="500" showEffect="fade">
+                <p:panelGrid id="pgCliente" columns="2">
+                    <h:outputText value="Nombres" />
+                    <p:inputText value="#{clienteManagedBean.clienteEnEdicion.nombres}" />
+                    
+                    <h:outputText value="Apellidos" />
+                    <p:inputText value="#{clienteManagedBean.clienteEnEdicion.apellidos}" />
+                    
+                    <h:outputText value="DUI" />
+                    <p:inputMask value="#{clienteManagedBean.clienteEnEdicion.dui}" mask="99999999-9"/>
+                    
+                    <p:commandButton value="Guardar" actionListener="#{clienteManagedBean.guardarCliente}" 
+                                     update="form:dtCliente form:mensajes" oncomplete="PF('dlCliente').hide()" />
+                    <p:commandButton value="Cancelar" actionListener="#{clienteManagedBean.nuevoCliente()}" 
+                                     update="form:dtCliente" oncomplete="PF('dlCliente').hide()" />
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
