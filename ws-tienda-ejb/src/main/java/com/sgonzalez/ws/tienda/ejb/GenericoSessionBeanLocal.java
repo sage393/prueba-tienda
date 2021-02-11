@@ -6,11 +6,13 @@
 package com.sgonzalez.ws.tienda.ejb;
 
 import java.util.Collection;
+import javax.ejb.Local;
 
 /**
  *
  * @author sam
  */
+@Local
 public interface GenericoSessionBeanLocal {
     
     public <T> Collection<T> obtenerTodos(Class clase) throws Exception;
