@@ -14,7 +14,7 @@
         <module>ws-tienda-services</module>
         <module>ws-tienda-dao</module>
         <module>ws-tienda-util</module>
-        <module>ui-tienda</module>
+        <!--<module>ui-tienda</module>-->
         <module>tienda-ear</module>
     </modules>
     <name>tienda</name>
