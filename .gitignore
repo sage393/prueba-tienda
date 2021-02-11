@@ -53,10 +53,10 @@ nbdist/
 # End of https://www.toptal.com/developers/gitignore/api/netbeans,maven,java
 
 # proyecto
-ws-tienda-dao/target/
-ws-tienda-ejb/target/
-ws-tienda-entities/target/
-ws-tienda-services/target/
-ws-tienda-util/target/
-tienda-ear/tienda-ear-ear/target/
-ui-tienda/target/
+./ws-tienda-dao/target
+./ws-tienda-ejb/target
+./ws-tienda-entities/target
+./ws-tienda-services/target
+./ws-tienda-util/target
+./tienda-ear/tienda-ear-ear/target
+./ui-tienda/target
