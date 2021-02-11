@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -81,6 +82,7 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
+    @XmlTransient
     public Collection<Orden> getOrdenes() {
         return ordenes;
     }

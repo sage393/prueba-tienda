@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -90,6 +91,7 @@ public class Cliente implements Serializable {
         this.dui = dui;
     }
 
+    @XmlTransient
     public Collection<Orden> getOrdenes() {
         return ordenes;
     }
